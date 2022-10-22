@@ -1,0 +1,5 @@
+name: BanConnesso
+version: '${project.version}'
+main: it.founderconnessi.banconnesso.BanConnesso
+author: MrFreasy
+website: founderconnessi.it
