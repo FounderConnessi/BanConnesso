@@ -1,0 +1,11 @@
+name: BanConnesso
+version: '${project.version}'
+main: it.founderconnessi.banconnesso.BanConnesso
+authors: [ MrFreasy ]
+website: founderconnessi.it
+commands:
+  banconnesso:
+    description: Comando principale
+    usage: /<command>
+    aliases:
+      - bc
