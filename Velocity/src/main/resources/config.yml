@@ -1,0 +1,7 @@
+online-uuid: false
+refresh-rate: 60
+gravities:
+  - "LOW"
+  - "MEDIUM"
+  - "HIGH"
+kick-message: "Sei stato bannato con il seguente motivo: %reason%"
