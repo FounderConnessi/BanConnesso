@@ -1,6 +1,6 @@
-package it.founderconnessi.banconnesso.api;
+package it.founderconnessi.lib.api;
 
-import it.founderconnessi.banconnesso.Gravity;
+import it.founderconnessi.lib.Gravity;
 
 public class ApiFilters {
     private final Gravity[] gravities;

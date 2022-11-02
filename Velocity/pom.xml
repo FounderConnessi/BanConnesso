@@ -2,35 +2,43 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>it.founderconnessi</groupId>
-    <artifactId>BanConnesso</artifactId>
+    <parent>
+        <artifactId>BanConnesso</artifactId>
+        <groupId>it.founderconnessi</groupId>
+        <version>1.0.0</version>
+    </parent>
+
+    <groupId>it.founderconnessi.banconnesso</groupId>
+    <artifactId>Velocity</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>BanConnesso - Velocity</name>
-
     <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
-    <url>founderconnessi.it</url>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
+                <version>3.4.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -40,15 +48,41 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <filters>
+                        <filter>
+                            <artifact>it.founderconnessi:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/*.MF</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
                     <relocations>
                         <relocation>
+                            <pattern>it.founderconnessi.lib</pattern>
+                            <shadedPattern>it.founderconnessi.banconnesso</shadedPattern>
+                        </relocation>
+                        <relocation>
                             <pattern>org.simpleyaml</pattern>
-                            <shadedPattern>it.founderconnessi.banconnesso.libs.simpleyaml</shadedPattern>
+                            <shadedPattern>it.founderconnessi.banconnesso.lib.simpleyaml</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>org.yaml.snakeyaml</pattern>
+                            <shadedPattern>it.founderconnessi.banconnesso.lib.snakeyaml</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>../Library/src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
     <repositories>
@@ -66,7 +100,7 @@
         <dependency>
             <groupId>com.velocitypowered</groupId>
             <artifactId>velocity-api</artifactId>
-            <version>3.1.1</version>
+            <version>3.1.2-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -74,5 +108,12 @@
             <artifactId>Simple-Yaml</artifactId>
             <version>1.8.2</version>
         </dependency>
+        <dependency>
+            <groupId>it.founderconnessi.lib</groupId>
+            <artifactId>Library</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
+
 </project>

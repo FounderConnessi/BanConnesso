@@ -6,7 +6,8 @@ import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.LoginEvent;
 import com.velocitypowered.api.proxy.Player;
 import it.founderconnessi.banconnesso.BanConnesso;
-import it.founderconnessi.banconnesso.BanUserFields;
+import it.founderconnessi.lib.BanUserFields;
+import net.kyori.adventure.text.Component;
 
 public class LoginListener {
 
@@ -19,11 +20,13 @@ public class LoginListener {
                     player.getUniqueId()
             );
             event.setResult(ResultedEvent.ComponentResult.denied(
-                    user.replacePlaceholders(
-                            BanConnesso
-                                    .getInstance()
-                                    .getConfig()
-                                    .getString("kick-message")
+                    Component.text(
+                            user.replacePlaceholders(
+                                    BanConnesso
+                                            .getInstance()
+                                            .getConfig()
+                                            .getString("kick-message")
+                            )
                     )
             ));
         }

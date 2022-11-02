@@ -4,10 +4,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import it.founderconnessi.lib.BanList;
+import it.founderconnessi.lib.BanUserFields;
+import it.founderconnessi.lib.Gravity;
+import it.founderconnessi.lib.api.ApiFields;
+import it.founderconnessi.lib.api.ApiFilters;
+import it.founderconnessi.lib.api.ApiRequestBody;
 import it.founderconnessi.banconnesso.api.Api;
-import it.founderconnessi.banconnesso.api.ApiFields;
-import it.founderconnessi.banconnesso.api.ApiFilters;
-import it.founderconnessi.banconnesso.api.ApiRequestBody;
 import net.md_5.bungee.api.chat.TextComponent;
 
 import java.io.FileNotFoundException;

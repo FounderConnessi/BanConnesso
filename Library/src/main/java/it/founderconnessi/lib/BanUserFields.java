@@ -1,7 +1,4 @@
-package it.founderconnessi.banconnesso;
-
-import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+package it.founderconnessi.lib;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,19 +16,14 @@ public class BanUserFields {
         this.gravity = gravity;
     }
 
-    public TextComponent replacePlaceholders(String text) {
-        LegacyComponentSerializer serializer = LegacyComponentSerializer.builder().character('&').hexCharacter('#').hexColors().build();
-
+    public String replacePlaceholders(String text) {
         if (Objects.nonNull(startDate)) {
             LocalDateTime date = LocalDateTime.parse(startDate);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
             text = text.replaceAll("%start_date%", date.format(formatter));
         }
-
-        return serializer.deserialize(
-                text
-                        .replaceAll("%reason%", reason)
-                        .replaceAll("%gravity%", gravity.toString().toLowerCase())
-        );
+        text = text.replaceAll("%reason%", reason)
+                .replaceAll("%gravity%", gravity.toString().toLowerCase());
+        return text;
     }
 }

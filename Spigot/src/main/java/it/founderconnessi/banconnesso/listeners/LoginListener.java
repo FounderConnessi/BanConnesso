@@ -1,7 +1,7 @@
 package it.founderconnessi.banconnesso.listeners;
 
 import it.founderconnessi.banconnesso.BanConnesso;
-import it.founderconnessi.banconnesso.BanUserFields;
+import it.founderconnessi.lib.BanUserFields;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

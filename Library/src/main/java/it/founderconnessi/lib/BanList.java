@@ -1,4 +1,4 @@
-package it.founderconnessi.banconnesso;
+package it.founderconnessi.lib;
 
 import java.util.HashMap;
 import java.util.UUID;

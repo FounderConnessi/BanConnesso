@@ -1,4 +1,4 @@
-package it.founderconnessi.banconnesso.api;
+package it.founderconnessi.lib.api;
 
 public class ApiFields {
     private final boolean uuid;

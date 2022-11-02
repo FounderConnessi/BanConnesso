@@ -5,9 +5,13 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.founderconnessi.banconnesso.api.Api;
-import it.founderconnessi.banconnesso.api.ApiFields;
-import it.founderconnessi.banconnesso.api.ApiFilters;
-import it.founderconnessi.banconnesso.api.ApiRequestBody;
+import it.founderconnessi.lib.BanList;
+import it.founderconnessi.lib.BanUserFields;
+import it.founderconnessi.lib.Gravity;
+import it.founderconnessi.lib.api.ApiFields;
+import it.founderconnessi.lib.api.ApiFilters;
+import it.founderconnessi.lib.api.ApiRequestBody;
+import net.kyori.adventure.text.Component;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -78,11 +82,13 @@ public class BanManager {
                                     player.getUniqueId()
                             );
                             player.disconnect(
-                                    user.replacePlaceholders(
-                                            BanConnesso
-                                                    .getInstance()
-                                                    .getConfig()
-                                                    .getString("kick-message")
+                                    Component.text(
+                                            user.replacePlaceholders(
+                                                    BanConnesso
+                                                            .getInstance()
+                                                            .getConfig()
+                                                            .getString("kick-message")
+                                            )
                                     )
                             );
                         }

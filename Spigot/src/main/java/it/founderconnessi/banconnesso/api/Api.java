@@ -3,6 +3,7 @@ package it.founderconnessi.banconnesso.api;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.founderconnessi.banconnesso.BanConnesso;
+import it.founderconnessi.lib.api.ApiRequestBody;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
