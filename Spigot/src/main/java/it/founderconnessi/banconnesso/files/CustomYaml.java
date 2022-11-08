@@ -15,7 +15,6 @@ public class CustomYaml {
 
     private final String fileName;
     private YamlConfiguration configuration;
-    private File file;
 
     public CustomYaml(String fileName) {
         this.fileName = fileName;
@@ -24,26 +23,22 @@ public class CustomYaml {
 
     public void reload() {
         BanConnesso.getInstance().getDataFolder().mkdirs();
-        this.file = new File(BanConnesso.getInstance().getDataFolder(), fileName + ".yml");
-        try {
-            file.createNewFile();
-            InputStream is = BanConnesso.getInstance().getClass().getClassLoader().getResourceAsStream(fileName + ".yml");
-            OutputStream os = Files.newOutputStream(file.toPath());
-            ByteStreams.copy(is, os);
-            is.close();
-            os.close();
-        } catch (IOException e) {
-                e.printStackTrace();
-        }
-        this.configuration = YamlConfiguration.loadConfiguration(file);
-    }
+        File file = new File(BanConnesso.getInstance().getDataFolder(), fileName + ".yml");
 
-    public void save() {
-        try {
-            configuration.save(file);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+                InputStream is = BanConnesso.getInstance().getClass().getClassLoader().getResourceAsStream(fileName + ".yml");
+                OutputStream os = Files.newOutputStream(file.toPath());
+                ByteStreams.copy(is, os);
+                is.close();
+                os.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
+        this.configuration = YamlConfiguration.loadConfiguration(file);
     }
 
     public Configuration getConfiguration() {

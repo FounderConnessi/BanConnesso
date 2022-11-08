@@ -16,7 +16,6 @@ public class CustomYaml {
 
     private final String fileName;
     private Configuration configuration;
-    private File file;
 
     public CustomYaml(String fileName) {
         this.fileName = fileName;
@@ -25,23 +24,24 @@ public class CustomYaml {
 
     public void reload() {
         BanConnesso.getInstance().getDataFolder().mkdirs();
-        this.file = new File(BanConnesso.getInstance().getDataFolder(), fileName + ".yml");
-        try {
-            file.createNewFile();
-            InputStream is = BanConnesso.getInstance().getClass().getClassLoader().getResourceAsStream(fileName + ".yml");
-            OutputStream os = Files.newOutputStream(file.toPath());
-            ByteStreams.copy(is, os);
-            is.close();
-            os.close();
-            configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
-            ConfigurationProvider.getProvider(YamlConfiguration.class).save(configuration, file);
-        } catch (IOException e) {
+        File file = new File(BanConnesso.getInstance().getDataFolder(), fileName + ".yml");
+
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+                InputStream is = BanConnesso.getInstance().getClass().getClassLoader().getResourceAsStream(fileName + ".yml");
+                OutputStream os = Files.newOutputStream(file.toPath());
+                ByteStreams.copy(is, os);
+                is.close();
+                os.close();
+
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-    }
+        }
 
-    public void save() {
         try {
+            configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
             ConfigurationProvider.getProvider(YamlConfiguration.class).save(configuration, file);
         } catch (IOException e) {
             e.printStackTrace();
