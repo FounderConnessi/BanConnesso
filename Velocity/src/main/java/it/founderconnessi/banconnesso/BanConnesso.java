@@ -10,6 +10,7 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import it.founderconnessi.banconnesso.commands.MainCommand;
 import it.founderconnessi.banconnesso.files.CustomYaml;
 import it.founderconnessi.banconnesso.listeners.LoginListener;
+import it.founderconnessi.lib.utils.UpdateChecker;
 import org.simpleyaml.configuration.file.YamlConfiguration;
 import org.slf4j.Logger;
 
@@ -30,7 +31,7 @@ public class BanConnesso {
     private final Logger logger;
     private BanManager banManager;
 
-    private final CustomYaml config;
+    private CustomYaml config;
 
     @Inject
     public BanConnesso(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory) {
@@ -38,17 +39,24 @@ public class BanConnesso {
         this.server = server;
         this.logger = logger;
         this.dataDirectory = dataDirectory;
-        this.config = new CustomYaml(dataDirectory, "config");
+
+    }
+
+    public static BanConnesso getInstance() {
+        return instance;
     }
 
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
+        this.config = new CustomYaml(dataDirectory, "config");
         this.banManager = new BanManager();
         server.getEventManager().register(
                 this,
                 new LoginListener()
         );
         server.getCommandManager().register("banconnesso", new MainCommand(), "bc");
+        if (config.getConfiguration().getBoolean("update-checker"))
+            new UpdateChecker(new it.founderconnessi.banconnesso.Plugin());
         logger.info("§aSviluppato da FounderConnessi.");
     }
 
@@ -61,10 +69,6 @@ public class BanConnesso {
     @Subscribe
     public void onDisable(ProxyShutdownEvent event) {
         logger.info("§4Sviluppato da FounderConnessi.");
-    }
-
-    public static BanConnesso getInstance() {
-        return instance;
     }
 
     public BanManager getBanManager() {

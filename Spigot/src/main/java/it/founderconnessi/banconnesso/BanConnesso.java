@@ -3,6 +3,7 @@ package it.founderconnessi.banconnesso;
 import it.founderconnessi.banconnesso.commands.MainCommand;
 import it.founderconnessi.banconnesso.files.CustomYaml;
 import it.founderconnessi.banconnesso.listeners.LoginListener;
+import it.founderconnessi.lib.utils.UpdateChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -27,6 +28,8 @@ public final class BanConnesso extends JavaPlugin {
                 this
         );
         getCommand("banconnesso").setExecutor(new MainCommand());
+        if (config.getConfiguration().getBoolean("update-checker"))
+            new UpdateChecker(new it.founderconnessi.banconnesso.Plugin());
         Bukkit.getConsoleSender().sendMessage("§8§l[§c§lBanConnesso§8§l] §aSviluppato da FounderConnessi.");
     }
 

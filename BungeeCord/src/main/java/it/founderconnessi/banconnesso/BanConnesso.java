@@ -3,6 +3,7 @@ package it.founderconnessi.banconnesso;
 import it.founderconnessi.banconnesso.commands.MainCommand;
 import it.founderconnessi.banconnesso.files.CustomYaml;
 import it.founderconnessi.banconnesso.listeners.LoginListener;
+import it.founderconnessi.lib.utils.UpdateChecker;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
@@ -11,6 +12,10 @@ public final class BanConnesso extends Plugin {
     private static BanConnesso instance;
     private BanManager banManager;
     private CustomYaml config;
+
+    public static BanConnesso getInstance() {
+        return instance;
+    }
 
     @Override
     public void onEnable() {
@@ -25,6 +30,8 @@ public final class BanConnesso extends Plugin {
                 this,
                 new MainCommand("banconnesso", "bc")
         );
+        if (config.getConfiguration().getBoolean("update-checker"))
+            new UpdateChecker(new it.founderconnessi.banconnesso.Plugin());
         getProxy().getConsole().sendMessage(
                 new TextComponent("§8§l[§c§lBanConnesso§8§l] §aSviluppato da FounderConnessi.")
         );
@@ -35,6 +42,7 @@ public final class BanConnesso extends Plugin {
         banManager.updateRequestBody();
         banManager.loadBannedUsers();
     }
+
     @Override
     public void onDisable() {
         getProxy().getConsole().sendMessage(
@@ -44,10 +52,6 @@ public final class BanConnesso extends Plugin {
 
     public BanManager getBanManager() {
         return banManager;
-    }
-
-    public static BanConnesso getInstance() {
-        return instance;
     }
 
     public Configuration getConfig() {
