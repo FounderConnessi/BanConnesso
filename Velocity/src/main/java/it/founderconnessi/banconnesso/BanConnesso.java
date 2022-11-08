@@ -29,8 +29,8 @@ public class BanConnesso {
     private final ProxyServer server;
     @Inject
     private final Logger logger;
+    private final it.founderconnessi.banconnesso.Plugin plugin;
     private BanManager banManager;
-
     private CustomYaml config;
 
     @Inject
@@ -39,7 +39,10 @@ public class BanConnesso {
         this.server = server;
         this.logger = logger;
         this.dataDirectory = dataDirectory;
-
+        this.plugin = new it.founderconnessi.banconnesso.Plugin(
+                new it.founderconnessi.banconnesso.Logger(),
+                new Config()
+        );
     }
 
     public static BanConnesso getInstance() {
@@ -49,14 +52,14 @@ public class BanConnesso {
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
         this.config = new CustomYaml(dataDirectory, "config");
-        this.banManager = new BanManager();
+        banManager = new BanManager(plugin);
         server.getEventManager().register(
                 this,
                 new LoginListener()
         );
         server.getCommandManager().register("banconnesso", new MainCommand(), "bc");
         if (config.getConfiguration().getBoolean("update-checker"))
-            new UpdateChecker(new it.founderconnessi.banconnesso.Plugin());
+            new UpdateChecker(plugin);
         logger.info("§aSviluppato da FounderConnessi.");
     }
 

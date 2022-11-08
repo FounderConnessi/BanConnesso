@@ -8,6 +8,8 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 
+import java.nio.file.Paths;
+
 public final class BanConnesso extends Plugin {
     private static BanConnesso instance;
     private BanManager banManager;
@@ -20,8 +22,15 @@ public final class BanConnesso extends Plugin {
     @Override
     public void onEnable() {
         instance = this;
-        config = new CustomYaml("config");
-        banManager = new BanManager();
+        config = new CustomYaml(
+                Paths.get("plugins/BanConnesso"),
+                "config"
+        );
+        it.founderconnessi.banconnesso.Plugin plugin = new it.founderconnessi.banconnesso.Plugin(
+                new Logger(),
+                new Config()
+        );
+        banManager = new BanManager(plugin);
         getProxy().getPluginManager().registerListener(
                 this,
                 new LoginListener()
@@ -31,9 +40,9 @@ public final class BanConnesso extends Plugin {
                 new MainCommand("banconnesso", "bc")
         );
         if (config.getConfiguration().getBoolean("update-checker"))
-            new UpdateChecker(new it.founderconnessi.banconnesso.Plugin());
+            new UpdateChecker(plugin);
         getProxy().getConsole().sendMessage(
-                new TextComponent("§8§l[§c§lBanConnesso§8§l] §aSviluppato da FounderConnessi.")
+                new TextComponent("§7[§cBanConnesso§7] §aSviluppato da FounderConnessi.")
         );
     }
 
@@ -46,7 +55,7 @@ public final class BanConnesso extends Plugin {
     @Override
     public void onDisable() {
         getProxy().getConsole().sendMessage(
-                new TextComponent("§8§l[§c§lBanConnesso§8§l] §4Sviluppato da FounderConnessi.")
+                new TextComponent("§7[§cBanConnesso§7] §4Sviluppato da FounderConnessi.")
         );
     }
 

@@ -1,47 +1,43 @@
 package it.founderconnessi.banconnesso.files;
 
-import com.google.common.io.ByteStreams;
-import it.founderconnessi.banconnesso.BanConnesso;
-import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Objects;
+
 
 public class CustomYaml {
 
     private final String fileName;
+    private final Path pluginPath;
     private YamlConfiguration configuration;
 
-    public CustomYaml(String fileName) {
-        this.fileName = fileName;
+    public CustomYaml(Path pluginPath, String fileName) {
+        this.fileName = fileName + ".yml";
+        this.pluginPath = pluginPath;
         reload();
     }
 
     public void reload() {
-        BanConnesso.getInstance().getDataFolder().mkdirs();
-        File file = new File(BanConnesso.getInstance().getDataFolder(), fileName + ".yml");
-
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-                InputStream is = BanConnesso.getInstance().getClass().getClassLoader().getResourceAsStream(fileName + ".yml");
-                OutputStream os = Files.newOutputStream(file.toPath());
-                ByteStreams.copy(is, os);
-                is.close();
-                os.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            if (!Files.exists(pluginPath)) {
+                Files.createDirectory(pluginPath);
             }
+            Path configPath = pluginPath.resolve(fileName);
+            if (!Files.exists(configPath)) {
+                InputStream in = this.getClass().getClassLoader().getResourceAsStream(fileName);
+                Files.copy(Objects.requireNonNull(in), configPath);
+            }
+            configuration = YamlConfiguration.loadConfiguration(configPath.toFile());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-
-        this.configuration = YamlConfiguration.loadConfiguration(file);
     }
 
-    public Configuration getConfiguration() {
+    public YamlConfiguration getConfiguration() {
         return configuration;
     }
 }

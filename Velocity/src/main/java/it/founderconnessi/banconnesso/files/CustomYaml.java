@@ -1,54 +1,37 @@
 package it.founderconnessi.banconnesso.files;
 
-import com.google.common.io.ByteStreams;
-import it.founderconnessi.banconnesso.BanConnesso;
 import org.simpleyaml.configuration.file.YamlConfiguration;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 
 
 public class CustomYaml {
 
     private final String fileName;
-    private final Path path;
+    private final Path pluginPath;
     private YamlConfiguration configuration;
 
-    public CustomYaml(Path path, String fileName) {
+    public CustomYaml(Path pluginPath, String fileName) {
         this.fileName = fileName + ".yml";
-        this.path = path;
+        this.pluginPath = pluginPath;
         reload();
     }
 
     public void reload() {
-
-        if (!Files.exists(path)) {
-            try {
-                Files.createDirectory(path);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        File file = new File(path.toString(), fileName);
-        if (!file.exists()) {
-            try {
-                InputStream is = BanConnesso.getInstance().getClass().getClassLoader().getResourceAsStream(fileName + ".yml");
-                OutputStream os = Files.newOutputStream(file.toPath());
-                ByteStreams.copy(is, os);
-                is.close();
-                os.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
         try {
-            configuration = YamlConfiguration.loadConfiguration(file);
+            if (!Files.exists(pluginPath)) {
+                Files.createDirectory(pluginPath);
+            }
+            Path configPath = pluginPath.resolve(fileName);
+            if (!Files.exists(configPath)) {
+                InputStream in = this.getClass().getClassLoader().getResourceAsStream(fileName);
+                Files.copy(Objects.requireNonNull(in), configPath);
+            }
+            configuration = YamlConfiguration.loadConfiguration(configPath.toFile());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

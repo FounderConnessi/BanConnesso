@@ -2,16 +2,16 @@ package it.founderconnessi.banconnesso;
 
 import it.founderconnessi.lib.AbsBanManager;
 import it.founderconnessi.lib.BanUserFields;
+import it.founderconnessi.lib.PluginInt;
 import net.md_5.bungee.api.chat.TextComponent;
 
 import java.util.concurrent.TimeUnit;
 
 public class BanManager extends AbsBanManager {
 
-    public BanManager() {
+    public BanManager(PluginInt plugin) {
         super(
-                new Logger(),
-                new Config(),
+                plugin,
                 "plugins/BanConnesso"
         );
     }
@@ -47,7 +47,7 @@ public class BanManager extends AbsBanManager {
                 BanConnesso.getInstance(),
                 this::loadBannedUsers,
                 1,
-                config.getInt("refresh-rate") * 60L,
+                plugin.getConfig().getInt("refresh-rate") * 60L,
                 TimeUnit.SECONDS
         );
     }

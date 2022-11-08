@@ -2,14 +2,14 @@ package it.founderconnessi.banconnesso;
 
 import it.founderconnessi.lib.AbsBanManager;
 import it.founderconnessi.lib.BanUserFields;
+import it.founderconnessi.lib.PluginInt;
 import org.bukkit.Bukkit;
 
 public class BanManager extends AbsBanManager {
 
-    public BanManager() {
+    public BanManager(PluginInt plugin) {
         super(
-                new Logger(),
-                new Config(),
+                plugin,
                 "plugins/BanConnesso"
         );
     }
@@ -43,7 +43,7 @@ public class BanManager extends AbsBanManager {
                 BanConnesso.getInstance(),
                 this::loadBannedUsers,
                 1,
-                config.getInt("refresh-rate") * 1200L
+                plugin.getConfig().getInt("refresh-rate") * 1200L
         );
     }
 }

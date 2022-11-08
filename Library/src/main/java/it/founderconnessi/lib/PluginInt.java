@@ -7,4 +7,8 @@ public interface PluginInt {
     String getServerType();
 
     void sendConsoleMessage(String message);
+
+    LoggerInt getLogger();
+
+    ConfigInt getConfig();
 }

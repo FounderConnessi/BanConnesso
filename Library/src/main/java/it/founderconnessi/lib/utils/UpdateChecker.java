@@ -31,7 +31,7 @@ public class UpdateChecker {
             String line = br.readLine();
             return JsonParser.parseString(line).getAsJsonObject().get("version").getAsJsonObject().get(plugin.getServerType().toLowerCase()).getAsString();
         } catch (Exception ignored) {
-            plugin.sendConsoleMessage("§8[§cBanConnesso§8] §4Controllo degli aggiornamenti fallito");
+            plugin.getLogger().warning("Controllo degli aggiornamenti fallito");
         }
         return null;
     }

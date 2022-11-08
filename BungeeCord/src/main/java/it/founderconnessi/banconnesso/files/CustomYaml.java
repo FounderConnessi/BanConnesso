@@ -1,50 +1,41 @@
 package it.founderconnessi.banconnesso.files;
 
-import com.google.common.io.ByteStreams;
-import it.founderconnessi.banconnesso.BanConnesso;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Objects;
+
 
 public class CustomYaml {
 
     private final String fileName;
+    private final Path pluginPath;
     private Configuration configuration;
 
-    public CustomYaml(String fileName) {
-        this.fileName = fileName;
+    public CustomYaml(Path pluginPath, String fileName) {
+        this.fileName = fileName + ".yml";
+        this.pluginPath = pluginPath;
         reload();
     }
 
     public void reload() {
-        BanConnesso.getInstance().getDataFolder().mkdirs();
-        File file = new File(BanConnesso.getInstance().getDataFolder(), fileName + ".yml");
-
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-                InputStream is = BanConnesso.getInstance().getClass().getClassLoader().getResourceAsStream(fileName + ".yml");
-                OutputStream os = Files.newOutputStream(file.toPath());
-                ByteStreams.copy(is, os);
-                is.close();
-                os.close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
         try {
-            configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
-            ConfigurationProvider.getProvider(YamlConfiguration.class).save(configuration, file);
+            if (!Files.exists(pluginPath)) {
+                Files.createDirectory(pluginPath);
+            }
+            Path configPath = pluginPath.resolve(fileName);
+            if (!Files.exists(configPath)) {
+                InputStream in = this.getClass().getClassLoader().getResourceAsStream(fileName);
+                Files.copy(Objects.requireNonNull(in), configPath);
+            }
+            configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(configPath.toFile());
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

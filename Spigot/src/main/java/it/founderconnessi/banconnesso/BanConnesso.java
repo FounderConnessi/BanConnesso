@@ -8,6 +8,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.nio.file.Paths;
+
 public final class BanConnesso extends JavaPlugin {
 
     private static BanConnesso instance;
@@ -21,15 +23,22 @@ public final class BanConnesso extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        config = new CustomYaml("config");
-        banManager = new BanManager();
+        config = new CustomYaml(
+                Paths.get("plugins/BanConnesso"),
+                "config"
+        );
+        Plugin plugin = new Plugin(
+                new Logger(),
+                new Config()
+        );
+        banManager = new BanManager(plugin);
         getServer().getPluginManager().registerEvents(
                 new LoginListener(),
                 this
         );
         getCommand("banconnesso").setExecutor(new MainCommand());
         if (config.getConfiguration().getBoolean("update-checker"))
-            new UpdateChecker(new it.founderconnessi.banconnesso.Plugin());
+            new UpdateChecker(plugin);
         Bukkit.getConsoleSender().sendMessage("§8§l[§c§lBanConnesso§8§l] §aSviluppato da FounderConnessi.");
     }
 

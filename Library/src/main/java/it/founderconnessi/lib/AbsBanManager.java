@@ -18,15 +18,13 @@ import java.util.UUID;
 
 public abstract class AbsBanManager {
     protected final BanList banList;
-    protected final LoggerInt logger;
-    protected final ConfigInt config;
+    protected final PluginInt plugin;
     protected final String pluginFolder;
     protected String hashCode;
     protected ApiRequestBody requestBody;
 
-    public AbsBanManager(LoggerInt logger, ConfigInt config, String pluginFolder) {
-        this.logger = logger;
-        this.config = config;
+    public AbsBanManager(PluginInt plugin, String pluginFolder) {
+        this.plugin = plugin;
         this.pluginFolder = pluginFolder;
         banList = new BanList();
         updateRequestBody();
@@ -34,7 +32,7 @@ public abstract class AbsBanManager {
     }
 
     public void loadBannedUsers() {
-        JsonObject rawData = Api.fetchUsers(requestBody, logger);
+        JsonObject rawData = Api.fetchUsers(requestBody, plugin.getLogger());
         if (Objects.isNull(rawData))
             rawData = loadJson();
         String newHashCode = rawData.get("hashCode").getAsString();
@@ -62,14 +60,14 @@ public abstract class AbsBanManager {
 
     public void updateRequestBody() {
         ApiFields fields = new ApiFields(
-                config.getBoolean("online-uuid"),
-                !config.getBoolean("online-uuid"),
+                plugin.getConfig().getBoolean("online-uuid"),
+                !plugin.getConfig().getBoolean("online-uuid"),
                 false,
                 true,
                 false
         );
         ApiFilters filters = new ApiFilters(
-                config
+                plugin.getConfig()
                         .getStringList("gravities")
                         .stream()
                         .map(gravity -> Gravity.valueOf(gravity.toUpperCase()))
@@ -79,14 +77,14 @@ public abstract class AbsBanManager {
     }
 
     public boolean isBanned(String nickname, UUID uuid) {
-        if (config.getBoolean("online-uuid"))
+        if (plugin.getConfig().getBoolean("online-uuid"))
             return banList.contains(uuid);
         else
             return banList.contains(nickname.toLowerCase());
     }
 
     public BanUserFields getUser(String nickname, UUID uuid) {
-        if (config.getBoolean("online-uuid"))
+        if (plugin.getConfig().getBoolean("online-uuid"))
             return banList.getUser(uuid.toString());
         else
             return banList.getUser(nickname.toLowerCase());
