@@ -1,6 +1,7 @@
 package it.founderconnessi.banconnesso.listeners;
 
 import it.founderconnessi.banconnesso.BanConnesso;
+import it.founderconnessi.banconnesso.Config;
 import it.founderconnessi.lib.BanUserFields;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,10 +21,7 @@ public class LoginListener implements Listener {
             event.disallow(
                     PlayerLoginEvent.Result.KICK_BANNED,
                     user.replacePlaceholders(
-                            BanConnesso
-                                    .getInstance()
-                                    .getConfig()
-                                    .getString("kick-message")
+                            Config.getColoredMessage("kick-message")
                     )
             );
         }

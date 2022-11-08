@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>it.founderconnessi.banconnesso</groupId>
-    <artifactId>Velocity</artifactId>
+    <artifactId>BanConnesso-Velocity</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 

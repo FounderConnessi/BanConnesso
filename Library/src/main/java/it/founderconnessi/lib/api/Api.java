@@ -1,9 +1,8 @@
-package it.founderconnessi.banconnesso.api;
+package it.founderconnessi.lib.api;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import it.founderconnessi.banconnesso.BanConnesso;
-import it.founderconnessi.lib.api.ApiRequestBody;
+import it.founderconnessi.lib.LoggerInt;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -16,7 +15,7 @@ public class Api {
 
     private final static String ENDPOINT = "http://localhost:3000/ban/users";
 
-    public static JsonObject fetchUsers(ApiRequestBody requestBody) {
+    public static JsonObject fetchUsers(ApiRequestBody requestBody, LoggerInt logger) {
         String bodyData = requestBody.toString();
         try {
             URL url = new URL(ENDPOINT);
@@ -32,10 +31,10 @@ public class Api {
             }
             try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
                 String line = br.readLine();
-                return new JsonParser().parse(line).getAsJsonObject();
+                return JsonParser.parseString(line).getAsJsonObject();
             }
         } catch (IOException exception) {
-            BanConnesso.getInstance().getLogger().warning(exception.getMessage());
+            logger.warning(exception.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
