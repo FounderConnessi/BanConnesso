@@ -16,6 +16,9 @@ import org.slf4j.Logger;
 
 import java.nio.file.Path;
 
+/**
+ * Classe principale del plugin.
+ */
 @Plugin(
         id = "banconnesso",
         name = "BanConnesso",
@@ -24,13 +27,40 @@ import java.nio.file.Path;
         authors = {"MrFreasy"}
 )
 public class BanConnesso {
+    /**
+     * Istanza del plugin.
+     */
     private static BanConnesso instance;
+
+    /**
+     * Percorso della cartella del plugin.
+     */
     public final Path dataDirectory;
+
+    /**
+     * Server proxy.
+     */
     private final ProxyServer server;
+
+    /**
+     * Logger del server.
+     */
     @Inject
     private final Logger logger;
+
+    /**
+     * Logger della libreria condivisa.
+     */
     private final it.founderconnessi.banconnesso.Plugin plugin;
+
+    /**
+     * Gestore del ban.
+     */
     private BanManager banManager;
+
+    /**
+     * Configurazione del plugin.
+     */
     private CustomYaml config;
 
     @Inject
@@ -45,6 +75,10 @@ public class BanConnesso {
         );
     }
 
+    /**
+     * Metodo che restituisce l'istanza del plugin.
+     * @return istanza del plugin.
+     */
     public static BanConnesso getInstance() {
         return instance;
     }
@@ -63,6 +97,9 @@ public class BanConnesso {
         logger.info("§aSviluppato da FounderConnessi.");
     }
 
+    /**
+     * Metodo da invocare per effettuare un reload del plugin.
+     */
     public void reload() {
         config.reload();
         banManager.updateRequestBody();
@@ -74,20 +111,35 @@ public class BanConnesso {
         logger.info("§4Sviluppato da FounderConnessi.");
     }
 
+    /**
+     * Metodo che restituisce il gestore del ban.
+     * @return gestore del ban.
+     */
     public BanManager getBanManager() {
         return banManager;
     }
 
+    /**
+     * Metodo che restituisce il server proxy
+     * @return server proxy.
+     */
     public ProxyServer getServer() {
         return server;
     }
 
+    /**
+     * Metodo che restituisce il logger del server.
+     * @return logger del server.
+     */
     public Logger getLogger() {
         return logger;
     }
 
+    /**
+     * Metodo che restituisce la configurazione del plugin.
+     * @return configurazione del plugin.
+     */
     public YamlConfiguration getConfig() {
         return config.getConfiguration();
     }
-
 }

@@ -4,11 +4,26 @@ import it.founderconnessi.lib.ConfigInt;
 import it.founderconnessi.lib.LoggerInt;
 import it.founderconnessi.lib.PluginInt;
 
+/**
+ * Classe concreta che implementa l'intefaccia {@link PluginInt}.
+ */
 public class Plugin implements PluginInt {
 
+    /**
+     * Logger.
+     */
     private final LoggerInt logger;
+
+    /**
+     * Config.
+     */
     private final ConfigInt config;
 
+    /**
+     * Costruisce un oggetto di tipo {@link Plugin}.
+     * @param logger logger.
+     * @param config config.
+     */
     public Plugin(LoggerInt logger, ConfigInt config) {
         this.logger = logger;
         this.config = config;

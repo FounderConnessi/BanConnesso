@@ -6,6 +6,9 @@ import com.velocitypowered.api.proxy.Player;
 import it.founderconnessi.banconnesso.BanConnesso;
 import net.kyori.adventure.text.Component;
 
+/**
+ * Classe concreta che implementa il comando principale del BanConnesso.
+ */
 public class MainCommand implements SimpleCommand {
 
     @Override

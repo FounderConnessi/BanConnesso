@@ -6,6 +6,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 
+/**
+ * Classe concreta che implementa il comando principale del BanConnesso.
+ */
 public class MainCommand implements CommandExecutor {
 
     @Override

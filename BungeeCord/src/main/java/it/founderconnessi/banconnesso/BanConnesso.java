@@ -10,11 +10,30 @@ import net.md_5.bungee.config.Configuration;
 
 import java.nio.file.Paths;
 
+/**
+ * Classe principale del plugin.
+ */
 public final class BanConnesso extends Plugin {
+
+    /**
+     * Istanza del plugin.
+     */
     private static BanConnesso instance;
+
+    /**
+     * Gestore del ban.
+     */
     private BanManager banManager;
+
+    /**
+     * Configurazione del plugin.
+     */
     private CustomYaml config;
 
+    /**
+     * Metodo che restituisce l'istanza del plugin.
+     * @return istanza del plugin.
+     */
     public static BanConnesso getInstance() {
         return instance;
     }
@@ -46,6 +65,9 @@ public final class BanConnesso extends Plugin {
         );
     }
 
+    /**
+     * Metodo da invocare per effettuare un reload del plugin.
+     */
     public void reload() {
         config.reload();
         banManager.updateRequestBody();
@@ -59,10 +81,18 @@ public final class BanConnesso extends Plugin {
         );
     }
 
+    /**
+     * Metodo che restituisce il gestore del ban.
+     * @return gestore del ban.
+     */
     public BanManager getBanManager() {
         return banManager;
     }
 
+    /**
+     * Metodo che restituisce la configurazione del plugin.
+     * @return configurazione del plugin.
+     */
     public Configuration getConfig() {
         return config.getConfiguration();
     }

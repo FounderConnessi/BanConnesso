@@ -6,6 +6,9 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
+/**
+ * Classe concreta che implementa il comando principale del BanConnesso.
+ */
 public class MainCommand extends Command {
 
     public MainCommand(String name, String... aliases) {

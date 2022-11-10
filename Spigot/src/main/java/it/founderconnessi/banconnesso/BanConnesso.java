@@ -10,12 +10,30 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.nio.file.Paths;
 
+/**
+ * Classe principale del plugin.
+ */
 public final class BanConnesso extends JavaPlugin {
 
+    /**
+     * Istanza del plugin.
+     */
     private static BanConnesso instance;
+
+    /**
+     * Gestore del ban.
+     */
     private BanManager banManager;
+
+    /**
+     * Configurazione del plugin.
+     */
     private CustomYaml config;
 
+    /**
+     * Metodo che restituisce l'istanza del plugin.
+     * @return istanza del plugin.
+     */
     public static BanConnesso getInstance() {
         return instance;
     }
@@ -42,6 +60,9 @@ public final class BanConnesso extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage("§8§l[§c§lBanConnesso§8§l] §aSviluppato da FounderConnessi.");
     }
 
+    /**
+     * Metodo da invocare per effettuare un reload del plugin.
+     */
     public void reload() {
         config.reload();
         banManager.updateRequestBody();
@@ -53,10 +74,18 @@ public final class BanConnesso extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage("§8§l[§c§lBanConnesso§8§l] §4Sviluppato da FounderConnessi.");
     }
 
+    /**
+     * Metodo che restituisce il gestore del ban.
+     * @return gestore del ban.
+     */
     public BanManager getBanManager() {
         return banManager;
     }
 
+    /**
+     * Metodo che restituisce la configurazione del plugin.
+     * @return configurazione del plugin.
+     */
     public Configuration getConfiguration() {
         return config.getConfiguration();
     }

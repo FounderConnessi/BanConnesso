@@ -9,18 +9,42 @@ import java.nio.file.Path;
 import java.util.Objects;
 
 
+/**
+ * Classe concreta necessaria per gestire un file di configurazione del plugin in formato YAML.
+ * @see <a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/configuration/file/YamlConfiguration.html">YamlConfiguration</a>
+ */
 public class CustomYaml {
 
+    /**
+     * Nome del file comprensivo di estensione.
+     */
     private final String fileName;
+
+    /**
+     * Percorso relativo della cartella del plugin.
+     */
     private final Path pluginPath;
+
+    /**
+     * Configurazione in formato YAML.
+     */
     private YamlConfiguration configuration;
 
+    /** Costruisce un oggetto di tipo {@link CustomYaml}.
+     * @param pluginPath percorso relativo della cartella del plugin.
+     * @param fileName nome del file privo di estensione.
+     */
     public CustomYaml(Path pluginPath, String fileName) {
         this.fileName = fileName + ".yml";
         this.pluginPath = pluginPath;
         reload();
     }
 
+    /**
+     * Metodo utile per ricaricare la configurazione del plugin.
+     * <p>Il metodo carica in memoria il file salvato in {@link #pluginPath} se presente,<p>
+     * altrimenti recupera la configurazione predefinita dalle risorse del plugin.
+     */
     public void reload() {
         try {
             if (!Files.exists(pluginPath)) {
@@ -37,6 +61,11 @@ public class CustomYaml {
         }
     }
 
+
+    /**
+     * Metodo che restituisce la configurazione.
+     * @return Configurazione in formato YAML.
+     */
     public YamlConfiguration getConfiguration() {
         return configuration;
     }

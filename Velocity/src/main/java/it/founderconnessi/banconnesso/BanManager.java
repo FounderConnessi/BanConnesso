@@ -6,8 +6,15 @@ import it.founderconnessi.lib.PluginInt;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Classe concreta che estende la classe astratta {@link AbsBanManager}, implementando i metodi astratti.
+ */
 public class BanManager extends AbsBanManager {
 
+    /**
+     * Costruisce un oggetto di tipo {@link BanManager}
+     * @param plugin plugin.
+     */
     public BanManager(PluginInt plugin) {
         super(
                 plugin,

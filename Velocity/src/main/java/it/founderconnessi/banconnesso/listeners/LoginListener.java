@@ -9,8 +9,15 @@ import it.founderconnessi.banconnesso.BanConnesso;
 import it.founderconnessi.banconnesso.Config;
 import it.founderconnessi.lib.BanUserFields;
 
+/**
+ * Classe concreta che si occupa di gestire l'evento specifico di login di un utente all'interno del server
+ * per verificare la presenza del ban, espellendolo dal server in caso positivo.
+ */
 public class LoginListener {
 
+    /**
+     * Metodo che verifica durare il login se l'utente è bandito, espellendolo in caso positivo.
+     */
     @Subscribe(order = PostOrder.FIRST)
     public void LoginEvent(LoginEvent event) {
         Player player = event.getPlayer();

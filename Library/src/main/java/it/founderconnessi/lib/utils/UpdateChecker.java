@@ -9,13 +9,35 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Objects;
 
+/**
+ * Classe concreta immutabile che permette di controllare la presenza di nuovi aggiornamenti.<p>
+ */
 public class UpdateChecker {
 
+    /**
+     * Endpoint a cui effettuare le richiesta.
+     */
     private final static String ENDPOINT = "http://localhost:3000/";
+
+    /**
+     * Versione corrente del plugin.
+     */
     private final String currentVersion;
-    private final PluginInt plugin;
+
+    /**
+     * Ultima versione del plugin.
+     */
     private final String latestVersion;
 
+    /**
+     * Logger.
+     */
+    private final PluginInt plugin;
+
+    /**
+     * Costruisce un oggetto di tipo {@link UpdateChecker}.
+     * @param plugin plugin.
+     */
     public UpdateChecker(PluginInt plugin) {
         this.plugin = plugin;
         this.currentVersion = plugin.getPluginVersion();
@@ -23,6 +45,10 @@ public class UpdateChecker {
         checkUpdate();
     }
 
+    /**
+     * Metodo che permette di ricevere l'ultima versione disponibile del plugin.
+     * @return ultima versione disponibile.
+     */
     private String getLastVersion() {
         try {
             URL url = new URL(ENDPOINT);
@@ -36,6 +62,10 @@ public class UpdateChecker {
         return null;
     }
 
+    /**
+     * Il metodo permette di controllare la presenza di un nuovo aggiornamento.
+     * Notifica tramite messaggio in console solamente se si riscontra una nuova versione del plugin.
+     */
     public void checkUpdate() {
         if (Objects.nonNull(latestVersion) && !latestVersion.equalsIgnoreCase(currentVersion)) {
             String space = "                ";

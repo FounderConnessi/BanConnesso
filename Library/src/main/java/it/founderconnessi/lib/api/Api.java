@@ -11,10 +11,23 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * Classe utile a interfacciarsi con le API esterne di FounderConnessi.<p>
+ * Quest'ultima permette di recuperare gli utenti banditi dalla lista.
+ */
 public class Api {
 
+    /**
+     * Endpoint a cui effettuare le richieste API.
+     */
     private final static String ENDPOINT = "http://localhost:3000/ban/users";
 
+    /**
+     * Metodo utile per prelevare la lista di utenti banditi, dato il corpo della richiesta.
+     * @param requestBody corpo della richiesta.
+     * @param logger logger del plugin.
+     * @return oggetto di tipo {@link JsonObject}.
+     */
     public static JsonObject fetchUsers(ApiRequestBody requestBody, LoggerInt logger) {
         String bodyData = requestBody.toString();
         try {
