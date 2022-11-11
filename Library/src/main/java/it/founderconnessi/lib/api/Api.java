@@ -20,7 +20,7 @@ public class Api {
     /**
      * Endpoint a cui effettuare le richieste API.
      */
-    private final static String ENDPOINT = "http://localhost:3000/ban/users";
+    private final static String ENDPOINT = "https://api.founderconnessi.it/ban/users";
 
     /**
      * Metodo utile per prelevare la lista di utenti banditi, dato il corpo della richiesta.

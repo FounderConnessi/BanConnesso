@@ -17,7 +17,7 @@ public class UpdateChecker {
     /**
      * Endpoint a cui effettuare le richiesta.
      */
-    private final static String ENDPOINT = "http://localhost:3000/";
+    private final static String ENDPOINT = "https://api.founderconnessi.it/";
 
     /**
      * Versione corrente del plugin.
