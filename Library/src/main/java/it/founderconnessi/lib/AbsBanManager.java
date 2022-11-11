@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -105,9 +106,11 @@ public abstract class AbsBanManager {
                 true,
                 false
         );
+        List<String> gravities = plugin.getConfig().getStringList("gravities");
+        if (!gravities.contains("HIGH") && !gravities.contains("high"))
+            gravities.add("HIGH");
         ApiFilters filters = new ApiFilters(
-                plugin.getConfig()
-                        .getStringList("gravities")
+                gravities
                         .stream()
                         .map(gravity -> Gravity.valueOf(gravity.toUpperCase()))
                         .toArray(Gravity[]::new)
