@@ -1,9 +1,34 @@
-online-uuid: false
+#Impostalo su 'true' se vuoi cercare automaticamente nuove versioni di BanConnesso.
 update-checker: true
+
+#Inserisci il nome del tuo server Minecraft. Devi essere membro di FounderConnessi.
+server-name: "Sconosciuto"
+
+#Abilita questa funzione solo se il tuo server è 'online-mode=true' oppure utilizzi un
+#plugin che abilita gli online-uuid, come ad esempio JPremium.
+online-uuid: false
+
+#Ogni quanti minuti il server deve controllare se ci sono nuovi giocatori nella blacklist.
+#Raccomandiamo di lasciare il valore di default di 60 minuti.
 refresh-rate: 60
+
+#A quali livelli di gravità vuoi impedire l'accesso al tuo server. I giocatori blacklistati con
+#gravità HIGH sono bloccati di default. Rimuovi LOW e MEDIUM se vuoi permettere ai
+#giocatori blacklistati con gravità inferiori l'accesso solo al tuo server.
 gravities:
   - "LOW"
   - "MEDIUM"
-  - "HIGH"
-server-name: "Sconosciuto"
-kick-message: "Sei stato bannato con il seguente motivo: %reason%"
+
+#Messaggio custom quando un giocatore blacklistato prova a connettersi al server.
+kick-message: |-
+  &c&lBLACKLIST DI FOUNDERCONNESSI
+  &7
+  &7Sei stato blacklistato su tutti i server
+  &7italiani membri di FounderConnessi per:
+  &f
+  &c%reason%
+  &f
+  &f
+  &7Scopri il regolamento e richiedi un unban
+  &7tramite il sito ufficiale &ffounderconnessi.it
+  &f
