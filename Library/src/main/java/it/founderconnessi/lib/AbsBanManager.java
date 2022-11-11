@@ -67,6 +67,9 @@ public abstract class AbsBanManager {
         JsonObject rawData = Api.fetchUsers(requestBody, plugin.getLogger());
         if (Objects.isNull(rawData))
             rawData = loadJson();
+        int count = rawData.get("count").getAsInt();
+        if(count==0)
+            return;
         String newHashCode = rawData.get("hashCode").getAsString();
         if (Objects.nonNull(hashCode) && hashCode.equalsIgnoreCase(newHashCode))
             return;
