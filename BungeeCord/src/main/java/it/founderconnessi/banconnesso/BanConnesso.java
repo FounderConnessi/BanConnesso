@@ -3,6 +3,7 @@ package it.founderconnessi.banconnesso;
 import it.founderconnessi.banconnesso.commands.MainCommand;
 import it.founderconnessi.banconnesso.files.CustomYaml;
 import it.founderconnessi.banconnesso.listeners.LoginListener;
+import it.founderconnessi.banconnesso.utils.Bstats;
 import it.founderconnessi.lib.utils.UpdateChecker;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -60,6 +61,7 @@ public final class BanConnesso extends Plugin {
         );
         if (config.getConfiguration().getBoolean("update-checker"))
             new UpdateChecker(plugin);
+        Bstats.sendMetrics();
         getProxy().getConsole().sendMessage(
                 new TextComponent("§7[§cBanConnesso§7] §aSviluppato da FounderConnessi.")
         );

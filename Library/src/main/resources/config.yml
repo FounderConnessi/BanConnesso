@@ -5,4 +5,5 @@ gravities:
   - "LOW"
   - "MEDIUM"
   - "HIGH"
+server-name: "Sconosciuto"
 kick-message: "Sei stato bannato con il seguente motivo: %reason%"

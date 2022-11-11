@@ -10,7 +10,9 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import it.founderconnessi.banconnesso.commands.MainCommand;
 import it.founderconnessi.banconnesso.files.CustomYaml;
 import it.founderconnessi.banconnesso.listeners.LoginListener;
+import it.founderconnessi.banconnesso.utils.Bstats;
 import it.founderconnessi.lib.utils.UpdateChecker;
+import org.bstats.velocity.Metrics;
 import org.simpleyaml.configuration.file.YamlConfiguration;
 import org.slf4j.Logger;
 
@@ -63,8 +65,13 @@ public class BanConnesso {
      */
     private CustomYaml config;
 
+    /**
+     * Fabbricatore delle metriche del server.
+     */
+    private final Metrics.Factory metricsFactory;
+
     @Inject
-    public BanConnesso(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory) {
+    public BanConnesso(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory, Metrics.Factory metricsFactory) {
         instance = this;
         this.server = server;
         this.logger = logger;
@@ -73,6 +80,7 @@ public class BanConnesso {
                 new it.founderconnessi.banconnesso.Logger(),
                 new Config()
         );
+        this.metricsFactory = metricsFactory;
     }
 
     /**
@@ -94,6 +102,7 @@ public class BanConnesso {
         server.getCommandManager().register("banconnesso", new MainCommand(), "bc");
         if (config.getConfiguration().getBoolean("update-checker"))
             new UpdateChecker(plugin);
+        Bstats.sendMetrics(metricsFactory);
         logger.info("§aSviluppato da FounderConnessi.");
     }
 
