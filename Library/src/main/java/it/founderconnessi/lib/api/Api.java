@@ -2,7 +2,9 @@ package it.founderconnessi.lib.api;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import it.founderconnessi.lib.LoggerInt;
+import it.founderconnessi.lib.interfaces.LoggerInt;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -28,7 +30,8 @@ public class Api {
      * @param logger logger del plugin.
      * @return oggetto di tipo {@link JsonObject}.
      */
-    public static JsonObject fetchUsers(ApiRequestBody requestBody, LoggerInt logger) {
+    @Nullable
+    public static JsonObject fetchUsers(@NotNull ApiRequestBody requestBody, @NotNull LoggerInt logger) {
         String bodyData = requestBody.toString();
         try {
             URL url = new URL(ENDPOINT);

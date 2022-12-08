@@ -1,5 +1,7 @@
 package it.founderconnessi.lib.api;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Classe concreta immutabile che rappresenta il corpo della richiesta API.<p>
  * La classe contiene {@link #fields}, ovvero i campi da mostrare e
@@ -22,7 +24,7 @@ public class ApiRequestBody {
      * @param fields contiene i campi da mostrare.
      * @param filters contiene i filtri da applicare.
      */
-    public ApiRequestBody(ApiFields fields, ApiFilters filters) {
+    public ApiRequestBody(@NotNull ApiFields fields, @NotNull ApiFilters filters) {
         this.fields = fields;
         this.filters = filters;
     }
@@ -31,6 +33,7 @@ public class ApiRequestBody {
      * Metodo che restuisce i campi da mostrare.
      * @return campi da mostrare.
      */
+    @NotNull
     public ApiFields getFields() {
         return fields;
     }
@@ -39,6 +42,7 @@ public class ApiRequestBody {
      * Metodo che restuisce i filtri applicati.
      * @return filtri applicati
      */
+    @NotNull
     public ApiFilters getFilters() {
         return filters;
     }

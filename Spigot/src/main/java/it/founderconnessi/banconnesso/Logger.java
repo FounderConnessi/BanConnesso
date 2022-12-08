@@ -1,6 +1,7 @@
 package it.founderconnessi.banconnesso;
 
-import it.founderconnessi.lib.LoggerInt;
+import it.founderconnessi.lib.interfaces.LoggerInt;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Classe concreta che implementa l'intefaccia {@link LoggerInt}, fornedo funzioni di log.
@@ -8,7 +9,7 @@ import it.founderconnessi.lib.LoggerInt;
 public class Logger implements LoggerInt {
 
     @Override
-    public void warning(String message) {
+    public void warning(@NotNull String message) {
         BanConnesso.getInstance().getLogger().warning(message);
     }
 }

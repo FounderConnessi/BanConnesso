@@ -8,6 +8,8 @@ import it.founderconnessi.lib.api.Api;
 import it.founderconnessi.lib.api.ApiFields;
 import it.founderconnessi.lib.api.ApiFilters;
 import it.founderconnessi.lib.api.ApiRequestBody;
+import it.founderconnessi.lib.interfaces.PluginInt;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -53,7 +55,7 @@ public abstract class AbsBanManager {
      * @param plugin plugin.
      * @param pluginFolder percorso relativo della cartella del plugin.
      */
-    public AbsBanManager(PluginInt plugin, String pluginFolder) {
+    public AbsBanManager(@NotNull PluginInt plugin, @NotNull String pluginFolder) {
         this.plugin = plugin;
         this.pluginFolder = pluginFolder;
         banList = new BanList();
@@ -107,6 +109,7 @@ public abstract class AbsBanManager {
                 false
         );
         List<String> gravities = plugin.getConfig().getStringList("gravities");
+        assert gravities != null;
         if (!gravities.contains("HIGH") && !gravities.contains("high"))
             gravities.add("HIGH");
         ApiFilters filters = new ApiFilters(
@@ -124,7 +127,7 @@ public abstract class AbsBanManager {
      * @param uuid uuid del giocatore.
      * @return {@code true} se l'utente è bandito, {@code false} altrimenti.
      */
-    public boolean isBanned(String nickname, UUID uuid) {
+    public boolean isBanned(@NotNull String nickname, @NotNull UUID uuid) {
         if (plugin.getConfig().getBoolean("online-uuid"))
             return banList.contains(uuid);
         else
@@ -137,7 +140,7 @@ public abstract class AbsBanManager {
      * @param uuid uuid del giocatore.
      * @return informazioni dell'utente bandito se presenti, {@code null} altrimenti.
      */
-    public BanUserFields getUser(String nickname, UUID uuid) {
+    public BanUserFields getUser(@NotNull String nickname, @NotNull UUID uuid) {
         if (plugin.getConfig().getBoolean("online-uuid"))
             return banList.getUser(uuid.toString());
         else
@@ -149,7 +152,7 @@ public abstract class AbsBanManager {
      * Si rivela utile per salvare la lista degli utenti banditi su file.
      * @param jsonObject oggetto json.
      */
-    private void saveToJson(JsonObject jsonObject) {
+    private void saveToJson(@NotNull JsonObject jsonObject) {
         FileWriter file;
         try {
             file = new FileWriter(pluginFolder + "/save.json");
@@ -166,6 +169,7 @@ public abstract class AbsBanManager {
      * Si rivela utile quando la richiesta API fallisce.
      * @return oggetto json.
      */
+    @NotNull
     private JsonObject loadJson() {
         try {
             return (JsonObject) JsonParser.parseReader(

@@ -1,7 +1,9 @@
 package it.founderconnessi.banconnesso;
 
-import it.founderconnessi.lib.ConfigInt;
+import it.founderconnessi.lib.interfaces.ConfigInt;
 import net.md_5.bungee.api.ChatColor;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -15,7 +17,8 @@ public class Config implements ConfigInt {
      * @param path percorso.
      * @return messaggio colorato.
      */
-    public static String getColoredMessage(String path) {
+    @NotNull
+    public static String getColoredMessage(@NotNull String path) {
         return ChatColor.translateAlternateColorCodes(
                 '&',
                 BanConnesso.getInstance().getConfig().getString(path)
@@ -23,22 +26,23 @@ public class Config implements ConfigInt {
     }
 
     @Override
-    public boolean getBoolean(String path) {
+    public boolean getBoolean(@NotNull String path) {
         return BanConnesso.getInstance().getConfig().getBoolean(path);
     }
 
     @Override
-    public String getString(String path) {
+    public String getString(@NotNull String path) {
         return BanConnesso.getInstance().getConfig().getString(path);
     }
 
     @Override
-    public int getInt(String path) {
+    public int getInt(@NotNull String path) {
         return BanConnesso.getInstance().getConfig().getInt(path);
     }
 
     @Override
-    public List<String> getStringList(String path) {
+    @Nullable
+    public List<String> getStringList(@NotNull String path) {
         return BanConnesso.getInstance().getConfig().getStringList(path);
     }
 }

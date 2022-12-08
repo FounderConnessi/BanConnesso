@@ -2,7 +2,7 @@ package it.founderconnessi.banconnesso;
 
 import it.founderconnessi.lib.AbsBanManager;
 import it.founderconnessi.lib.BanUserFields;
-import it.founderconnessi.lib.PluginInt;
+import it.founderconnessi.lib.interfaces.PluginInt;
 import net.md_5.bungee.api.chat.TextComponent;
 
 import java.util.concurrent.TimeUnit;

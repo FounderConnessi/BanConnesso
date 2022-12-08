@@ -1,7 +1,9 @@
 package it.founderconnessi.lib.utils;
 
 import com.google.gson.JsonParser;
-import it.founderconnessi.lib.PluginInt;
+import it.founderconnessi.lib.interfaces.PluginInt;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -38,7 +40,7 @@ public class UpdateChecker {
      * Costruisce un oggetto di tipo {@link UpdateChecker}.
      * @param plugin plugin.
      */
-    public UpdateChecker(PluginInt plugin) {
+    public UpdateChecker(@NotNull PluginInt plugin) {
         this.plugin = plugin;
         this.currentVersion = plugin.getPluginVersion();
         this.latestVersion = getLastVersion();
@@ -49,6 +51,7 @@ public class UpdateChecker {
      * Metodo che permette di ricevere l'ultima versione disponibile del plugin.
      * @return ultima versione disponibile.
      */
+    @Nullable
     private String getLastVersion() {
         try {
             URL url = new URL(ENDPOINT);

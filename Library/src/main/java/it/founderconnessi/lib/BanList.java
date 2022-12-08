@@ -1,5 +1,8 @@
 package it.founderconnessi.lib;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -29,7 +32,7 @@ public class BanList {
      * @param reason motivazione del ban.
      * @param gravity gravità del ban.
      */
-    public void addUser(String nickname, String startDate, String reason, Gravity gravity) {
+    public void addUser(@NotNull String nickname, @Nullable String startDate, @Nullable String reason, @Nullable Gravity gravity) {
         if (!contains(nickname))
             users.put(nickname.toLowerCase(), new BanUserFields(startDate, reason, gravity));
     }
@@ -41,7 +44,7 @@ public class BanList {
      * @param reason motivazione del ban.
      * @param gravity gravità del ban.
      */
-    public void addUser(UUID uuid, String startDate, String reason, Gravity gravity) {
+    public void addUser(@NotNull UUID uuid, @Nullable String startDate, @Nullable String reason, @Nullable Gravity gravity) {
         addUser(uuid.toString(), startDate, reason, gravity);
     }
 
@@ -49,7 +52,7 @@ public class BanList {
      * Metodo che permette di rimuovere un utente alla lista ban fornendo il nickname.
      * @param nickname nickname del giocatore.
      */
-    public void removeUser(String nickname) {
+    public void removeUser(@NotNull String nickname) {
         users.remove(nickname.toLowerCase());
     }
 
@@ -57,7 +60,7 @@ public class BanList {
      * Metodo che permette di rimuovere un utente alla lista ban fornendo l'uuid.
      * @param uuid uuid del giocatore.
      */
-    public void removeUser(UUID uuid) {
+    public void removeUser(@NotNull UUID uuid) {
         removeUser(uuid.toString());
     }
 
@@ -66,7 +69,8 @@ public class BanList {
      * @param nickname nickname del giocatore.
      * @return informazioni dell'utente bandito se presenti, {@code null} altrimenti.
      */
-    public BanUserFields getUser(String nickname) {
+    @Nullable
+    public BanUserFields getUser(@NotNull String nickname) {
         return users.get(nickname.toLowerCase());
     }
 
@@ -75,7 +79,8 @@ public class BanList {
      * @param uuid uuid del giocatore.
      * @return informazioni dell'utente bandito se presenti, {@code null} altrimenti.
      */
-    public BanUserFields getUser(UUID uuid) {
+    @Nullable
+    public BanUserFields getUser(@NotNull UUID uuid) {
         return users.get(uuid.toString());
     }
 
@@ -84,7 +89,7 @@ public class BanList {
      * @param nickname nickname del giocatore.
      * @return {@code true} se il giocatore è presente, {@code false} altrimenti
      */
-    public boolean contains(String nickname) {
+    public boolean contains(@NotNull String nickname) {
         return users.containsKey(nickname.toLowerCase());
     }
 
@@ -93,7 +98,7 @@ public class BanList {
      * @param uuid uuid del giocatore.
      * @return {@code true} se il giocatore è presente, {@code false} altrimenti
      */
-    public boolean contains(UUID uuid) {
+    public boolean contains(@NotNull UUID uuid) {
         return contains(uuid.toString());
     }
 

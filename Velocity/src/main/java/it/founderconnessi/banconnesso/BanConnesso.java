@@ -13,6 +13,7 @@ import it.founderconnessi.banconnesso.listeners.LoginListener;
 import it.founderconnessi.banconnesso.utils.Bstats;
 import it.founderconnessi.lib.utils.UpdateChecker;
 import org.bstats.velocity.Metrics;
+import org.jetbrains.annotations.NotNull;
 import org.simpleyaml.configuration.file.YamlConfiguration;
 import org.slf4j.Logger;
 
@@ -87,6 +88,7 @@ public class BanConnesso {
      * Metodo che restituisce l'istanza del plugin.
      * @return istanza del plugin.
      */
+    @NotNull
     public static BanConnesso getInstance() {
         return instance;
     }
@@ -124,6 +126,7 @@ public class BanConnesso {
      * Metodo che restituisce il gestore del ban.
      * @return gestore del ban.
      */
+    @NotNull
     public BanManager getBanManager() {
         return banManager;
     }
@@ -132,6 +135,7 @@ public class BanConnesso {
      * Metodo che restituisce il server proxy
      * @return server proxy.
      */
+    @NotNull
     public ProxyServer getServer() {
         return server;
     }
@@ -140,6 +144,7 @@ public class BanConnesso {
      * Metodo che restituisce il logger del server.
      * @return logger del server.
      */
+    @NotNull
     public Logger getLogger() {
         return logger;
     }
@@ -148,6 +153,7 @@ public class BanConnesso {
      * Metodo che restituisce la configurazione del plugin.
      * @return configurazione del plugin.
      */
+    @NotNull
     public YamlConfiguration getConfig() {
         return config.getConfiguration();
     }

@@ -1,6 +1,7 @@
 package it.founderconnessi.lib.api;
 
 import it.founderconnessi.lib.Gravity;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Classe concreta immutabile che descrive i filtri applicabili a una richiesta API.<p>
@@ -21,7 +22,7 @@ public class ApiFilters {
      * Costruisce un oggetto di tipo {@link ApiFilters}.<p>
      * @param gravities Vettore delle gravità da filtrare.
      */
-    public ApiFilters(Gravity[] gravities) {
+    public ApiFilters(@NotNull Gravity[] gravities) {
         this.gravities = gravities.clone();
     }
 
@@ -29,6 +30,7 @@ public class ApiFilters {
      * Metodo che restituisce il vettore della gravità.
      * @return vettore della gravità.
      */
+    @NotNull
     public Gravity[] getGravities() {
         return gravities;
     }

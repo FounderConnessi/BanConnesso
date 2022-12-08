@@ -1,5 +1,6 @@
 package it.founderconnessi.banconnesso.files;
 
+import org.jetbrains.annotations.NotNull;
 import org.simpleyaml.configuration.file.YamlConfiguration;
 
 import java.io.IOException;
@@ -34,7 +35,7 @@ public class CustomYaml {
      * @param pluginPath percorso relativo della cartella del plugin.
      * @param fileName nome del file privo di estensione.
      */
-    public CustomYaml(Path pluginPath, String fileName) {
+    public CustomYaml(@NotNull Path pluginPath, @NotNull String fileName) {
         this.fileName = fileName + ".yml";
         this.pluginPath = pluginPath;
         reload();
@@ -66,6 +67,7 @@ public class CustomYaml {
      * Metodo che restituisce la configurazione.
      * @return Configurazione in formato YAML.
      */
+    @NotNull
     public YamlConfiguration getConfiguration() {
         return configuration;
     }

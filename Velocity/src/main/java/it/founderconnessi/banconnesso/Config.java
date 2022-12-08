@@ -1,8 +1,10 @@
 package it.founderconnessi.banconnesso;
 
-import it.founderconnessi.lib.ConfigInt;
+import it.founderconnessi.lib.interfaces.ConfigInt;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -14,34 +16,37 @@ public class Config implements ConfigInt {
     /**
      * Serializzatore dei colori.
      */
-    static LegacyComponentSerializer COLOR_SERIALIZER = LegacyComponentSerializer.builder().character('&').hexCharacter('#').hexColors().build();
+    static final LegacyComponentSerializer COLOR_SERIALIZER = LegacyComponentSerializer.builder().character('&').hexCharacter('#').hexColors().build();
 
     /**
      * Metodo che si occupa di colorare il messaggio in funzione dei codici colore presenti in esso.
      * @param message messaggio.
      * @return messaggio colorato.
      */
-    public static TextComponent getColoredMessage(String message) {
+    @NotNull
+    public static TextComponent getColoredMessage(@NotNull String message) {
         return COLOR_SERIALIZER.deserialize(message);
     }
 
     @Override
-    public boolean getBoolean(String path) {
+    public boolean getBoolean(@NotNull String path) {
         return BanConnesso.getInstance().getConfig().getBoolean(path);
     }
 
     @Override
-    public String getString(String path) {
+    @Nullable
+    public String getString(@NotNull String path) {
         return BanConnesso.getInstance().getConfig().getString(path);
     }
 
     @Override
-    public int getInt(String path) {
+    public int getInt(@NotNull String path) {
         return BanConnesso.getInstance().getConfig().getInt(path);
     }
 
     @Override
-    public List<String> getStringList(String path) {
+    @Nullable
+    public List<String> getStringList(@NotNull String path) {
         return BanConnesso.getInstance().getConfig().getStringList(path);
     }
 }

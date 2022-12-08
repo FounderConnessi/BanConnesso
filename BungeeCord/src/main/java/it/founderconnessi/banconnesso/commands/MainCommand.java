@@ -5,13 +5,14 @@ import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Classe concreta che implementa il comando principale del BanConnesso.
  */
 public class MainCommand extends Command {
 
-    public MainCommand(String name, String... aliases) {
+    public MainCommand(@NotNull String name, @NotNull String... aliases) {
         super(name, null, aliases);
     }
 

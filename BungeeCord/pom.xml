@@ -64,6 +64,14 @@
                                     <pattern>org.bstats</pattern>
                                     <shadedPattern>it.founderconnessi.banconnesso.lib.bstats</shadedPattern>
                                 </relocation>
+                                <relocation>
+                                    <pattern>org.intellij</pattern>
+                                    <shadedPattern>it.founderconnessi.banconnesso.lib.intellij</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.jetbrains</pattern>
+                                    <shadedPattern>it.founderconnessi.banconnesso.lib.jetbrains</shadedPattern>
+                                </relocation>
                             </relocations>
                         </configuration>
                     </execution>

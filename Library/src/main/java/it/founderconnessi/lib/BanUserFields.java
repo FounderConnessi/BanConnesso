@@ -1,5 +1,8 @@
 package it.founderconnessi.lib;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
@@ -31,7 +34,7 @@ public class BanUserFields {
      * @param reason motivazione del ban.
      * @param gravity gravità del ban.
      */
-    public BanUserFields(String startDate, String reason, Gravity gravity) {
+    public BanUserFields(@Nullable String startDate, @Nullable String reason, @Nullable Gravity gravity) {
         this.startDate = startDate;
         this.reason = reason;
         this.gravity = gravity;
@@ -43,14 +46,17 @@ public class BanUserFields {
      * @param text testo contenente i placeholders.
      * @return testo dopo aver sostituito i placeholders, con le info corrispondenti.
      */
-    public String replacePlaceholders(String text) {
+    @NotNull
+    public String replacePlaceholders(@NotNull String text) {
         if (Objects.nonNull(startDate)) {
             LocalDateTime date = LocalDateTime.parse(startDate);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
             text = text.replaceAll("%start_date%", date.format(formatter));
         }
-        text = text.replaceAll("%reason%", reason)
-                .replaceAll("%gravity%", gravity.toString().toLowerCase());
+        if(Objects.nonNull(reason))
+            text = text.replaceAll("%reason%", reason);
+        if(Objects.nonNull(gravity))
+            text = text.replaceAll("%gravity%", gravity.toString().toLowerCase());
         return text;
     }
 }

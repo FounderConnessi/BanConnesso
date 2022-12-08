@@ -8,6 +8,7 @@ import it.founderconnessi.lib.utils.UpdateChecker;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
+import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Paths;
 
@@ -35,6 +36,7 @@ public final class BanConnesso extends Plugin {
      * Metodo che restituisce l'istanza del plugin.
      * @return istanza del plugin.
      */
+    @NotNull
     public static BanConnesso getInstance() {
         return instance;
     }
@@ -87,6 +89,7 @@ public final class BanConnesso extends Plugin {
      * Metodo che restituisce il gestore del ban.
      * @return gestore del ban.
      */
+    @NotNull
     public BanManager getBanManager() {
         return banManager;
     }
@@ -95,6 +98,7 @@ public final class BanConnesso extends Plugin {
      * Metodo che restituisce la configurazione del plugin.
      * @return configurazione del plugin.
      */
+    @NotNull
     public Configuration getConfig() {
         return config.getConfiguration();
     }

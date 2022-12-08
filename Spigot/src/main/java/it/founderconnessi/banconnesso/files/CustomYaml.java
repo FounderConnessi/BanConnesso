@@ -1,6 +1,7 @@
 package it.founderconnessi.banconnesso.files;
 
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,7 +34,7 @@ public class CustomYaml {
      * @param pluginPath percorso relativo della cartella del plugin.
      * @param fileName nome del file privo di estensione.
      */
-    public CustomYaml(Path pluginPath, String fileName) {
+    public CustomYaml(@NotNull Path pluginPath, @NotNull String fileName) {
         this.fileName = fileName + ".yml";
         this.pluginPath = pluginPath;
         reload();
@@ -64,6 +65,7 @@ public class CustomYaml {
      * Metodo che restituisce la configurazione.
      * @return Configurazione in formato YAML.
      */
+    @NotNull
     public YamlConfiguration getConfiguration() {
         return configuration;
     }

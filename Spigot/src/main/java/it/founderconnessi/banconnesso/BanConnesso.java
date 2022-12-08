@@ -8,6 +8,7 @@ import it.founderconnessi.lib.utils.UpdateChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Paths;
 
@@ -35,6 +36,7 @@ public final class BanConnesso extends JavaPlugin {
      * Metodo che restituisce l'istanza del plugin.
      * @return istanza del plugin.
      */
+    @NotNull
     public static BanConnesso getInstance() {
         return instance;
     }
@@ -80,6 +82,7 @@ public final class BanConnesso extends JavaPlugin {
      * Metodo che restituisce il gestore del ban.
      * @return gestore del ban.
      */
+    @NotNull
     public BanManager getBanManager() {
         return banManager;
     }
@@ -88,6 +91,7 @@ public final class BanConnesso extends JavaPlugin {
      * Metodo che restituisce la configurazione del plugin.
      * @return configurazione del plugin.
      */
+    @NotNull
     public Configuration getConfiguration() {
         return config.getConfiguration();
     }
