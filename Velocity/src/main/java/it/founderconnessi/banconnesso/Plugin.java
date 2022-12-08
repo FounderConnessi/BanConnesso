@@ -34,15 +34,13 @@ public class Plugin implements PluginInt {
     @Override
     @NotNull
     public String getPluginVersion() {
-        return String.valueOf(
-                BanConnesso.getInstance().getServer().getPluginManager().getPlugin("banconnesso").get().getDescription().getVersion()
-        );
+        return BanConnesso.getInstance().getServer().getPluginManager().getPlugin("banconnesso").get().getDescription().getVersion().get();
     }
 
     @Override
     @NotNull
     public String getServerType() {
-        return "Spigot";
+        return "Velocity";
     }
 
     @Override
