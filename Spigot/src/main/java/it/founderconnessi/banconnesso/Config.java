@@ -27,23 +27,23 @@ public class Config implements ConfigInt {
 
     @Override
     public boolean getBoolean(@NotNull String path) {
-        return BanConnesso.getInstance().getConfig().getBoolean(path);
+        return BanConnesso.getInstance().getConfiguration().getBoolean(path);
     }
 
     @Override
     @Nullable
     public String getString(@NotNull String path) {
-        return BanConnesso.getInstance().getConfig().getString(path);
+        return BanConnesso.getInstance().getConfiguration().getString(path);
     }
 
     @Override
     public int getInt(@NotNull String path) {
-        return BanConnesso.getInstance().getConfig().getInt(path);
+        return BanConnesso.getInstance().getConfiguration().getInt(path);
     }
 
     @Override
     @Nullable
     public List<String> getStringList(@NotNull String path) {
-        return BanConnesso.getInstance().getConfig().getStringList(path);
+        return BanConnesso.getInstance().getConfiguration().getStringList(path);
     }
 }
