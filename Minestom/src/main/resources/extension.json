@@ -1,0 +1,5 @@
+{
+  "entrypoint": "it.founderconnessi.banconnesso.BanConnesso",
+  "name": "BanConnesso",
+  "version": "${project.version}"
+}
