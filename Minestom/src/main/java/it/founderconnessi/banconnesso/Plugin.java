@@ -40,7 +40,7 @@ public class Plugin implements PluginInt {
     @Override
     @NotNull
     public String getServerType() {
-        return "Spigot";
+        return "Minestom";
     }
 
     @Override
